@@ -1,0 +1,15 @@
+from ..base_devices import BaseDeviceV2
+from ..fields import FieldName, UIntField
+
+
+class AC180(BaseDeviceV2):
+    def __init__(self, mac: str):
+        super().__init__(
+            mac,
+            [
+                UIntField(FieldName.DC_OUTPUT_POWER, 140),
+                UIntField(FieldName.AC_OUTPUT_POWER, 142),
+                UIntField(FieldName.DC_INPUT_POWER, 144),
+                UIntField(FieldName.AC_INPUT_POWER, 146),
+            ],
+        )
