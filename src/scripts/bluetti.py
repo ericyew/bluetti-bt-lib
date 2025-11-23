@@ -1,15 +1,14 @@
 """Bluetti BT commands."""
 
 import asyncio
-import logging
 from typing import List
 from bleak import BleakClient, BleakScanner
 from bleak.backends.device import BLEDevice
 
-from .bluetooth import DeviceReader, DeviceReaderConfig
-from .bluetooth.device_recognizer import recognize_device
-from .utils.device_info import get_type_by_bt_name
-from .utils.device_builder import build_device
+from ..bluetooth import DeviceReader, DeviceReaderConfig
+from ..bluetooth.device_recognizer import recognize_device
+from ..utils.device_info import get_type_by_bt_name
+from ..utils.device_builder import build_device
 
 
 async def read_device(address: str):
@@ -80,8 +79,6 @@ async def scan_async():
 
 def start():
     """Entrypoint."""
-    logging.basicConfig()
-
     asyncio.run(scan_async())
 
     print("done")

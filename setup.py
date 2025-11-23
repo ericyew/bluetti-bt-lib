@@ -34,7 +34,12 @@ setup(
     ],
     keywords=[],
     entry_points={
-        "console_scripts": ["bluetti = src.scripts:start"],
+        "console_scripts": [
+            "bluetti = src.scripts.bluetti:start",
+            "bluetti-scan = src.scripts.bluetti_scan:start",
+            "bluetti-detect = src.scripts.bluetti_detect:start",
+            "bluetti-read = src.scripts.bluetti_read:start",
+        ],
     },
     classifiers=[
         "Development Status :: 1 - Planning",

@@ -10,10 +10,46 @@ This library is provided without any warranty or support by Bluetti. I do not ta
 pip install bluetti-bt-lib
 ```
 
-## Run
+## Commands for testing
+
+### Scan for supported devices
 
 ```bash
-bluetti
+usage: bluetti-scan [-h]
+
+Detect bluetti devices by bluetooth name
+
+options:
+  -h, --help  show this help message and exit
+```
+
+### Detect device type by mac address
+
+```bash
+usage: bluetti-detect [-h] mac
+
+Detect bluetti devices
+
+positional arguments:
+  mac         Mac-address of the powerstation
+
+options:
+  -h, --help  show this help message and exit
+```
+
+### Read device data for supported devices
+
+```bash
+usage: bluetti-read [-h] [-m MAC] [-t TYPE] [-e ENCRYPTION]
+
+Detect bluetti devices
+
+options:
+  -h, --help            show this help message and exit
+  -m MAC, --mac MAC     Mac-address of the powerstation
+  -t TYPE, --type TYPE  Type of the powerstation (AC70 f.ex.)
+  -e ENCRYPTION, --encryption ENCRYPTION
+                        Add this if encryption is needed
 ```
 
 ## Supported Powerstations and data

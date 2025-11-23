@@ -1,2 +1,2 @@
 from .const import *
-from .scripts import *
+from .scripts.bluetti import *
