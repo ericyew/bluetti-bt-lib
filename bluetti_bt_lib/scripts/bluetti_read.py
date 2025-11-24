@@ -6,6 +6,7 @@ from bleak import BleakClient
 
 from ..bluetooth.device_reader import DeviceReader, DeviceReaderConfig
 from ..utils.device_builder import build_device
+from ..fields import FieldName, get_unit
 
 
 async def async_read_device(address: str, type: str, encryption: bool):
@@ -32,7 +33,9 @@ async def async_read_device(address: str, type: str, encryption: bool):
 
     print()
     for key, value in data.items():
-        print("{}: {}".format(key, value))
+        key = FieldName(key)
+        unit = get_unit(key)
+        print("{}: {}{}".format(key, value, "" if unit is None else unit))
 
 
 def start():
