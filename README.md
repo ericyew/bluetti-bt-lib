@@ -137,3 +137,25 @@ Validated
 ## Battery pack data
 
 Data for battery packs will no longer be available in this library
+
+## Adding fields
+
+To add new fields, you can use the `bluetti-detect` command to first find out which version of iot protocol is used and if it uses encryption.
+
+After you got this information, you can use the `bluetti-readall` command to read every registry and save the data to a json file. You should also note all values you see in the app to later compare the data.
+
+Here's how to use the `bluetti-readall` command:
+
+```bash
+usage: bluetti-readall [-h] [-m MAC] [-v VERSION] [-e ENCRYPTION]
+
+Detect bluetti devices
+
+options:
+  -h, --help            show this help message and exit
+  -m MAC, --mac MAC     Mac-address of the powerstation
+  -v VERSION, --version VERSION
+                        IoT protocol version
+  -e ENCRYPTION, --encryption ENCRYPTION
+                        Add this if encryption is needed
+```

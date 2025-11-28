@@ -12,6 +12,7 @@ from ..const import NOTIFY_UUID, WRITE_UUID
 from ..base_devices import BluettiDevice
 
 _LOGGER = logging.getLogger(__name__)
+_LOGGER.setLevel(logging.DEBUG)
 
 
 class DeviceReaderConfig:
@@ -45,7 +46,7 @@ class DeviceReader:
         self.encryption = BluettiEncryption()
 
     async def read(
-        self, only_registers: List[ReadableRegisters] | None = None
+        self, only_registers: List[ReadableRegisters] | None = None, raw: bool = False
     ) -> dict | None:
 
         registers = self.bluetti_device.get_polling_registers()
@@ -101,6 +102,12 @@ class DeviceReader:
                         )
 
                         _LOGGER.debug("Raw data: %s", body)
+
+                        if raw:
+                            d = {}
+                            d[register.starting_address] = body
+                            parsed_data.update(d)
+                            continue
 
                         parsed = self.bluetti_device.parse(
                             register.starting_address, body

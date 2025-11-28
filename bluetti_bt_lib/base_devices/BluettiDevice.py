@@ -22,6 +22,9 @@ class BluettiDevice:
 
         return result
 
+    def get_full_registers_range(self) -> List[ReadableRegisters]:
+        raise NotImplementedError
+
     def get_device_type_registers(self) -> List[ReadableRegisters]:
         raise NotImplementedError
 
