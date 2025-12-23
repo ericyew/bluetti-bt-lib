@@ -18,6 +18,9 @@ async def scan_async():
     async def callback(device: BLEDevice, _):
         result = get_type_by_bt_name(device.name)
 
+        if result is None:
+            return
+
         if result is not None or device.name.startswith("PBOX"):
             found.append(device.address)
             stop_event.set()
