@@ -81,6 +81,8 @@ options:
   -h, --help  show this help message and exit
 ```
 
+Example output: `['EB3A', '00:00:00:00:00:00']`
+
 ### Detect device type by mac address
 
 ```bash
@@ -101,6 +103,8 @@ Example:
 bluetti-detect 00:00:00:00:00:00
 ```
 
+Example output: `Device type is 'EB3A' with iot version 1 and serial 0000000000000. Full name: EB3A0000000000000`
+
 ### Read device data for supported devices
 
 ```bash
@@ -119,7 +123,26 @@ options:
 Example:
 
 ```bash
-bluetti-read -m 00:00:00:00:00:00 -t AC70
+bluetti-read -m 00:00:00:00:00:00 -t EB3A
+```
+
+Example output:
+```bash
+FieldName.DEVICE_TYPE: EB3A
+FieldName.DEVICE_SN: 0000000000000
+FieldName.BATTERY_SOC: 92%
+FieldName.DC_INPUT_POWER: 0W
+FieldName.AC_INPUT_POWER: 0W
+FieldName.AC_OUTPUT_POWER: 0W
+FieldName.DC_OUTPUT_POWER: 0W
+FieldName.CTRL_AC: False
+FieldName.CTRL_DC: True
+FieldName.CTRL_LED_MODE: LedMode.OFF
+FieldName.CTRL_POWER_OFF: False
+FieldName.CTRL_ECO: False
+FieldName.CTRL_ECO_TIME_MODE: EcoMode.HOURS1
+FieldName.CTRL_CHARGING_MODE: ChargingMode.STANDARD
+FieldName.CTRL_POWER_LIFTING: False
 ```
 
 ### Write to supported device
