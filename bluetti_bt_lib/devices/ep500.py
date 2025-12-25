@@ -15,5 +15,7 @@ class EP500(BaseDeviceV1):
                 UIntField(FieldName.PV_S1_VOLTAGE, 86, 0.1),
                 DecimalField(FieldName.PV_S1_POWER, 87, 1, 10),
                 DecimalField(FieldName.PV_S1_CURRENT, 88, 2, 10),
+                UIntField(FieldName.BATTERY_SOC_RANGE_START, 3015),
+                UIntField(FieldName.BATTERY_SOC_RANGE_END, 3016),
             ],
         )
