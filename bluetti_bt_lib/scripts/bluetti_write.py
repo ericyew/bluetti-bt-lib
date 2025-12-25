@@ -68,7 +68,7 @@ def start():
     if args.value:
         value = args.value
 
-    # logging.basicConfig(level=logging.DEBUG)
+    logging.basicConfig(level=logging.WARNING)
 
     asyncio.run(
         async_write(

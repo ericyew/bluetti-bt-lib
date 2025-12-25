@@ -53,6 +53,6 @@ def start():
         parser.print_help()
         return
 
-    # logging.basicConfig(level=logging.DEBUG)
+    logging.basicConfig(level=logging.WARNING)
 
     asyncio.run(async_read_device(args.mac, args.type, args.encryption))

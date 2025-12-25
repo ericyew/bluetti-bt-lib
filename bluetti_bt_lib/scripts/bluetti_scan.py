@@ -37,6 +37,6 @@ def start():
     )
     parser.parse_args()
 
-    # logging.basicConfig(level=logging.DEBUG)
+    logging.basicConfig(level=logging.WARNING)
 
     asyncio.run(scan_async())

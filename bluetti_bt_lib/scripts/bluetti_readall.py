@@ -68,6 +68,6 @@ def start():
 
     encryption = False if args.encryption is None else True
 
-    # logging.basicConfig(level=logging.DEBUG)
+    logging.basicConfig(level=logging.WARNING)
 
     asyncio.run(async_read_device(args.mac, args.version, encryption))
