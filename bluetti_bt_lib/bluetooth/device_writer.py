@@ -7,8 +7,7 @@ from bleak.exc import BleakError
 
 from ..const import WRITE_UUID
 from ..base_devices import BluettiDevice
-
-_LOGGER = logging.getLogger(__name__)
+from ..utils.privacy import mac_loggable
 
 
 class DeviceWriterConfig:
@@ -30,28 +29,32 @@ class DeviceWriter:
         self.config = config
         self.polling_lock = lock
 
+        self.logger = logging.getLogger(
+            f"{__name__}.{mac_loggable(bleak_client.address).replace(':', '_')}"
+        )
+
     async def write(self, field: str, value: Any):
         if self.config.use_encryption:
-            _LOGGER.error("Encryption on writes is not yet supported")
+            self.logger.error("Encryption on writes is not yet supported")
             return
 
         available_fields = [f.name for f in self.bluetti_device.fields]
         if field not in available_fields:
-            _LOGGER.error("Field not supported")
+            self.logger.error("Field not supported")
             return
 
         command = self.bluetti_device.build_write_command(field, value)
 
-        _LOGGER.debug("Writing to device register")
+        self.logger.debug("Writing to device register")
 
         async with self.polling_lock:
             try:
                 async with async_timeout.timeout(self.config.timeout):
                     if not self.client.is_connected:
-                        _LOGGER.debug("Connecting to device")
+                        self.logger.debug("Connecting to device")
                         await self.client.connect()
 
-                    _LOGGER.debug("Connected to device")
+                    self.logger.debug("Connected to device")
 
                     await self.client.write_gatt_char(
                         WRITE_UUID,
@@ -62,14 +65,14 @@ class DeviceWriter:
                     await asyncio.sleep(5)
 
             except TimeoutError:
-                _LOGGER.warning("Timeout")
+                self.logger.warning("Timeout")
                 return None
             except BleakError as err:
-                _LOGGER.warning("Bleak error: %s", err)
+                self.logger.warning("Bleak error: %s", err)
                 return None
             except BaseException as err:
-                _LOGGER.warning("Unknown error: %s", err)
+                self.logger.warning("Unknown error: %s", err)
                 return None
             finally:
                 await self.client.disconnect()
-                _LOGGER.debug("Disconnected from device")
+                self.logger.debug("Disconnected from device")
