@@ -6,11 +6,12 @@ class AC2P(BaseDeviceV2):
     """Bluetti AC2P device.
     
     Note: AC2P uses register 2011 for AC output state (not 1509 like AC2A).
-    The AC output register returns non-standard boolean values where any
-    non-zero value indicates ON state.
+    The AC output register returns non-standard boolean values:
+    - 1 = ON
+    - 3 = OFF (device returns 3, not 0)
     
-    For reading AC output state, we use BoolFieldNonZero which treats any 
-    non-zero value as True.
+    For reading AC output state, we use BoolFieldNonZero which treats only
+    value 1 as True. Any other value (including 3) is treated as False.
     
     For the control switches, we use SwitchField which writes standard 
     boolean values (0/1) that the device accepts correctly.
